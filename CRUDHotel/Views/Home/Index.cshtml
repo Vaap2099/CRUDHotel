@@ -4,8 +4,8 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bienvenidos al HOTEL California</h1>
+    <p>Un hotel ubicado en el corazon del puerto, para usted o toda su familia.</p>
 </div>
 
 <div class="card">
@@ -14,6 +14,36 @@
 
     </div>
     <div class="card-body">
-        <a class="btn btn-success btn-sm" asp-action="Habitacion_detalle"></a>
+        <a class="btn btn-success btn-sm" asp-action="Habitacion_Detalle" asp-controller="Home" asp-route-NumeroHabitacion="0">Crear Nuevo</a>
+        <hr />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Numero Habitacion</th>
+                    <th>Fotos</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Suite</th>
+                    <th>Numero de camas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.NumeroHabitacion</td>
+                        <td><img src="@item.Fotos" width="100px" /></td>
+                        <td>@item.Descripcion</td>
+                        <td>@item.Precio</td>
+                        <td>@item.Suite</td>
+                        <td>@item.NumeroCamas</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" asp-action="Habitacion_detalle" asp-controller="Home" asp-route-NumeroHabitacion="@item.NumeroHabitacion">Editar</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Eliminar" asp-controller="Home" asp-route-NumeroHabitacion="@item.NumeroHabitacion">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
