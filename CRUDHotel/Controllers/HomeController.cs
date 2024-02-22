@@ -1,21 +1,24 @@
-﻿using CRUDHotel.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using CRUDHotel.Models;
 using System.Diagnostics;
 
 namespace CRUDHotel.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly HotelContext _HotelContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(HotelContext context)
         {
-            _logger = logger;
+            _HotelContext = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Habitacion> habitaciones = _HotelContext.Habitaciones.ToList();
+            return View(habitaciones);
         }
 
         public IActionResult Privacy()

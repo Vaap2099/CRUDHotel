@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using CRUDHotel.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<HotelContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL"))
+    );
 
 var app = builder.Build();
 
